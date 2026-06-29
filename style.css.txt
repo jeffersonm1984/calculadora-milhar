@@ -1,0 +1,187 @@
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), 
+                url('https://images.unsplash.com/photo-1605721918127-0b5b2b1f4c5a?ixlib=rb-4.0.3&auto=format&fit=crop&q=80') center/cover no-repeat fixed;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(15, 15, 25, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.4);
+    border: 2px solid #ff8c00;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #ff8c00, #ff4500);
+    position: relative;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    letter-spacing: 4px;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    opacity: 0.95;
+}
+
+.bicho-selector {
+    padding: 30px;
+}
+
+.bicho-selector h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    color: #ffd700;
+}
+
+.bichos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+}
+
+.bicho-card {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid #444;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.bicho-card:hover {
+    transform: scale(1.08) rotate(2deg);
+    border-color: #ff8c00;
+    box-shadow: 0 0 25px rgba(255, 140, 0, 0.6);
+}
+
+.bicho-card.selected {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.bicho-card span {
+    font-size: 2.2rem;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.bicho-card .name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.bicho-card .numbers {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 5px;
+}
+
+.result-section {
+    padding: 30px;
+    border-top: 1px solid #444;
+}
+
+.selected-bicho {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 15px;
+    border: 2px solid #ffd700;
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ff4500, #ffd700);
+    color: #000;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.generate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 69, 0, 0.5);
+}
+
+.milhares-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.milhar-card {
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #ff8c00;
+    transition: all 0.3s;
+}
+
+.milhar-card:hover {
+    transform: scale(1.05);
+    background: rgba(255, 140, 0, 0.2);
+}
+
+.milhar-number {
+    font-size: 3.5rem;
+    font-weight: bold;
+    letter-spacing: 8px;
+    color: #ffd700;
+    text-shadow: 0 0 15px #ff8c00;
+    margin-bottom: 10px;
+}
+
+.hot-label {
+    color: #ff4500;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.tips {
+    margin-top: 40px;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #ffd700;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}

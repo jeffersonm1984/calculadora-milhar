@@ -1,0 +1,106 @@
+// script.js
+const animais = [
+    { nome: "Avestruz", emoji: "🦤", numeros: "01-02-03-04", grupo: 1 },
+    { nome: "Águia", emoji: "🦅", numeros: "05-06-07-08", grupo: 2 },
+    { nome: "Burro", emoji: "🐴", numeros: "09-10-11-12", grupo: 3 },
+    { nome: "Borboleta", emoji: "🦋", numeros: "13-14-15-16", grupo: 4 },
+    { nome: "Cachorro", emoji: "🐶", numeros: "17-18-19-20", grupo: 5 },
+    { nome: "Cabra", emoji: "🐐", numeros: "21-22-23-24", grupo: 6 },
+    { nome: "Carneiro", emoji: "🐑", numeros: "25-26-27-28", grupo: 7 },
+    { nome: "Camelo", emoji: "🐪", numeros: "29-30-31-32", grupo: 8 },
+    { nome: "Cobra", emoji: "🐍", numeros: "33-34-35-36", grupo: 9 },
+    { nome: "Coelho", emoji: "🐰", numeros: "37-38-39-40", grupo: 10 },
+    { nome: "Cavalo", emoji: "🐎", numeros: "41-42-43-44", grupo: 11 },
+    { nome: "Elefante", emoji: "🐘", numeros: "45-46-47-48", grupo: 12 },
+    { nome: "Galo", emoji: "🐓", numeros: "49-50-51-52", grupo: 13 },
+    { nome: "Gato", emoji: "🐱", numeros: "53-54-55-56", grupo: 14 },
+    { nome: "Jacaré", emoji: "🐊", numeros: "57-58-59-60", grupo: 15 },
+    { nome: "Leão", emoji: "🦁", numeros: "61-62-63-64", grupo: 16 },
+    { nome: "Macaco", emoji: "🐒", numeros: "65-66-67-68", grupo: 17 },
+    { nome: "Porco", emoji: "🐷", numeros: "69-70-71-72", grupo: 18 },
+    { nome: "Pavão", emoji: "🦚", numeros: "73-74-75-76", grupo: 19 },
+    { nome: "Peru", emoji: "🦃", numeros: "77-78-79-80", grupo: 20 },
+    { nome: "Touro", emoji: "🐂", numeros: "81-82-83-84", grupo: 21 },
+    { nome: "Tigre", emoji: "🐅", numeros: "85-86-87-88", grupo: 22 },
+    { nome: "Urso", emoji: "🐻", numeros: "89-90-91-92", grupo: 23 },
+    { nome: "Veado", emoji: "🦌", numeros: "93-94-95-96", grupo: 24 },
+    { nome: "Vaca", emoji: "🐮", numeros: "97-98-99-00", grupo: 25 }
+];
+
+let bichoSelecionado = null;
+
+function criarCardsBichos() {
+    const grid = document.getElementById('bichosGrid');
+    grid.innerHTML = '';
+    
+    animais.forEach((animal, index) => {
+        const card = document.createElement('div');
+        card.className = 'bicho-card';
+        card.innerHTML = `
+            <span>${animal.emoji}</span>
+            <div class="name">${animal.nome}</div>
+            <div class="numbers">${animal.numeros}</div>
+        `;
+        card.onclick = () => selecionarBicho(animal, card);
+        grid.appendChild(card);
+    });
+}
+
+function selecionarBicho(animal, cardElement) {
+    // Remove seleção anterior
+    document.querySelectorAll('.bicho-card').forEach(c => c.classList.remove('selected'));
+    cardElement.classList.add('selected');
+    
+    bichoSelecionado = animal;
+    
+    // Mostra seção de resultado
+    document.getElementById('resultSection').style.display = 'block';
+    document.getElementById('selectedBicho').innerHTML = `
+        <span style="font-size: 3rem;">${animal.emoji}</span><br>
+        ${animal.nome} <small>(${animal.numeros})</small>
+    `;
+    
+    // Limpa resultados anteriores
+    document.getElementById('milharesContainer').innerHTML = '';
+}
+
+function gerarMilharQuente(grupo) {
+    // Gera milhar "quente" baseado no grupo do bicho
+    const base = (grupo * 4 - 3).toString().padStart(2, '0'); // primeira dezena do grupo
+    const random1 = Math.floor(Math.random() * 10);
+    const random2 = Math.floor(Math.random() * 10);
+    const random3 = Math.floor(Math.random() * 10);
+    
+    // Variações quentes: começa com dezena do grupo + variações
+    return [
+        `${base}${random1}${random2}${random3}`,
+        `${random1}${base[0]}${random2}${random3}`,
+        `${random1}${random2}${base}${random3}`,
+        `${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}` // totalmente aleatório quente
+    ];
+}
+
+function gerarMilhares() {
+    if (!bichoSelecionado) return;
+    
+    const container = document.getElementById('milharesContainer');
+    container.innerHTML = '';
+    
+    const milhares = gerarMilharQuente(bichoSelecionado.grupo);
+    
+    milhares.forEach((milhar, i) => {
+        const card = document.createElement('div');
+        card.className = 'milhar-card';
+        card.innerHTML = `
+            <div class="milhar-number">${milhar}</div>
+            <div class="hot-label">MILHAR QUENTE #${i+1} 🔥</div>
+            <small>Grupo ${bichoSelecionado.grupo} • ${bichoSelecionado.nome}</small>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Inicializa
+document.addEventListener('DOMContentLoaded', () => {
+    criarCardsBichos();
+});
